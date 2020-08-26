@@ -10,10 +10,13 @@ def unzip_all():
             for f in z.namelist():
                 dirname = os.path.splitext(f)[0]  
                 os.mkdir(dirname)
-                content = io.BytesIO(z.read(f))
-                zip_file = zipfile.ZipFile(content)
-                for i in zip_file.namelist():
-                    zip_file.extract(i, dirname)
+                try:
+                    content = io.BytesIO(z.read(f))
+                    zip_file = zipfile.ZipFile(content)
+                    for i in zip_file.namelist():
+                        zip_file.extract(i, dirname)
+                except:
+                    pass
                     
 
 unzip_all()
